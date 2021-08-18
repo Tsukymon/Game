@@ -35,5 +35,10 @@ namespace RPGv2
                 MessageBox.Show("Please enter a name");
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

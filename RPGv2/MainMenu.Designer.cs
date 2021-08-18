@@ -86,7 +86,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainMenu";
-            this.Text = "Form1";
+            this.Text = "Main Menu";
             this.VisibleChanged += new System.EventHandler(this.MainMenu_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();

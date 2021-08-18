@@ -40,5 +40,10 @@ namespace RPGv2
                 MessageBox.Show("Please select a player");
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

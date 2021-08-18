@@ -39,8 +39,15 @@ namespace RPGv2
                 pictureBoxes[i].Location = new Point(12 + x, 12 + y);
                 pictureBoxes[i].Size = new Size(50, 50);                               
                 x += 62;
+                if (SQLSelections.AvailableGear[i].GetEquipedStatus() == true)
+                {
+                    toolTips[i].SetToolTip(pictureBoxes[i], $"{SQLSelections.AvailableGear[i].GetName()} Lvl: {SQLSelections.AvailableGear[i].GetLvlReq()}\r\n\r\nHp: {SQLSelections.AvailableGear[i].GetHp()}   Atk: {SQLSelections.AvailableGear[i].GetAtk()}   Matk: {SQLSelections.AvailableGear[i].GetMatk()}\r\nAcc: {SQLSelections.AvailableGear[i].GetAcc()}   Crit: {SQLSelections.AvailableGear[i].GetCrit()}\r\nDef: {SQLSelections.AvailableGear[i].GetDef()}   Mdef: {SQLSelections.AvailableGear[i].GetMdef()}\r\n\r\nEquiped by {SQLSelections.CurrentHiredHeroes[SQLSelections.AvailableGear[i].GetHeroID()].GetName()} Lvl: {SQLSelections.CurrentHiredHeroes[SQLSelections.AvailableGear[i].GetHeroID()].GetLvl()}");
+                }
+                else
+                {
+                    toolTips[i].SetToolTip(pictureBoxes[i], $"{SQLSelections.AvailableGear[i].GetName()} Lvl: {SQLSelections.AvailableGear[i].GetLvlReq()}\r\n\r\nHp: {SQLSelections.AvailableGear[i].GetHp()}   Atk: {SQLSelections.AvailableGear[i].GetAtk()}   Matk: {SQLSelections.AvailableGear[i].GetMatk()}\r\nAcc: {SQLSelections.AvailableGear[i].GetAcc()}   Crit: {SQLSelections.AvailableGear[i].GetCrit()}\r\nDef: {SQLSelections.AvailableGear[i].GetDef()}   Mdef: {SQLSelections.AvailableGear[i].GetMdef()}");
+                }
 
-                toolTips[i].SetToolTip(pictureBoxes[i], i.ToString());
                 pictureBoxes[i].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\{SQLSelections.AvailableGear[i].GetGearType()}.png");
             }
             
