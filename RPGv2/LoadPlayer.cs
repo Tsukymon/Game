@@ -29,6 +29,7 @@ namespace RPGv2
                 SQLSelections.SetCurrentPlayerID(listBox1.SelectedItem.ToString());
                 SQLSelections.LoadHiredHeroes();
                 SQLSelections.LoadAvailableGear();
+                SQLSelections.InitializeActiveSkills();
 
                 this.Hide();
                 MainGameScreen mainGameScreen = new MainGameScreen();

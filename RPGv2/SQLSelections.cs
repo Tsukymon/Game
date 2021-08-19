@@ -134,7 +134,7 @@ namespace RPGv2
             {
                 while (rdr.Read())
                 {
-                    CurrentHiredHeroes.Add(new HiredHero(rdr.GetInt32(0), rdr.GetString(1), rdr.GetFloat(2), rdr.GetFloat(3), rdr.GetFloat(4), rdr.GetFloat(5), rdr.GetFloat(6), rdr.GetFloat(7), rdr.GetFloat(8), rdr.GetInt32(9), rdr.GetInt32(10), rdr.GetInt32(11), rdr.GetInt32(12)));
+                    CurrentHiredHeroes.Add(new HiredHero(rdr.GetInt32(0), rdr.GetString(1), rdr.GetFloat(2), rdr.GetFloat(3), rdr.GetFloat(4), rdr.GetFloat(5), rdr.GetFloat(6), rdr.GetFloat(7), rdr.GetFloat(8), rdr.GetInt32(9), rdr.GetInt32(10), rdr.GetInt32(11), rdr.GetInt32(12), rdr.GetInt32(13)));
                 }               
             }
             else
@@ -149,13 +149,13 @@ namespace RPGv2
         {
             var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
             var con = new NpgsqlConnection(cs);
-            var HireHero = $"INSERT INTO public.\"HiredHeroes\" VALUES({GetHiredHeroesMaxIndex()+1}, '{LoadedDefaultHeroes[index].GetName()}', {LoadedDefaultHeroes[index].GetHp()}, {LoadedDefaultHeroes[index].GetAtk()}, {LoadedDefaultHeroes[index].GetMatk()}, {LoadedDefaultHeroes[index].GetAcc()}, {LoadedDefaultHeroes[index].GetCrit()}, {LoadedDefaultHeroes[index].GetDef()}, {LoadedDefaultHeroes[index].GetMdef()}, 1, {CurrentPlayerID}, 0, 10)";
+            var HireHero = $"INSERT INTO public.\"HiredHeroes\" VALUES({GetHiredHeroesMaxIndex()+1}, '{LoadedDefaultHeroes[index].GetName()}', {LoadedDefaultHeroes[index].GetHp()}, {LoadedDefaultHeroes[index].GetAtk()}, {LoadedDefaultHeroes[index].GetMatk()}, {LoadedDefaultHeroes[index].GetAcc()}, {LoadedDefaultHeroes[index].GetCrit()}, {LoadedDefaultHeroes[index].GetDef()}, {LoadedDefaultHeroes[index].GetMdef()}, 1, {CurrentPlayerID}, 0, 10, -1)";
             var cmd = new NpgsqlCommand(HireHero, con);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
 
-            CurrentHiredHeroes.Add(new HiredHero(GetHiredHeroesMaxIndex() + 1, LoadedDefaultHeroes[index].GetName(), LoadedDefaultHeroes[index].GetHp(), LoadedDefaultHeroes[index].GetAtk(), LoadedDefaultHeroes[index].GetMatk(), LoadedDefaultHeroes[index].GetAcc(), LoadedDefaultHeroes[index].GetCrit(), LoadedDefaultHeroes[index].GetDef(), LoadedDefaultHeroes[index].GetMdef(), 1, CurrentPlayerID, 0, 10));
+            CurrentHiredHeroes.Add(new HiredHero(GetHiredHeroesMaxIndex() + 1, LoadedDefaultHeroes[index].GetName(), LoadedDefaultHeroes[index].GetHp(), LoadedDefaultHeroes[index].GetAtk(), LoadedDefaultHeroes[index].GetMatk(), LoadedDefaultHeroes[index].GetAcc(), LoadedDefaultHeroes[index].GetCrit(), LoadedDefaultHeroes[index].GetDef(), LoadedDefaultHeroes[index].GetMdef(), 1, CurrentPlayerID, 0, 10, -1));
             
         }
 
@@ -359,6 +359,79 @@ namespace RPGv2
             cmd.ExecuteNonQuery();
             con.Close();
 
+        }
+
+        public static void InitializeActiveSkills()
+        {
+            for (int i = 0; i < SQLSelections.CurrentHiredHeroes.Count; i++)
+            {
+                if (CurrentHiredHeroes[i].GetName() == "Warrior")
+                {
+                    if (CurrentHiredHeroes[i].GetSelectedSkill() != -1)
+                    {
+                        int index = CurrentHiredHeroes[i].GetSelectedSkill();
+                        switch (index)
+                        {
+                            case 0:
+                                CurrentHiredHeroes[i].SetAtkMultiplier(1.1f);
+                                break;
+                            case 1:
+                                CurrentHiredHeroes[i].SetDefMultiplier(1.12f);
+                                CurrentHiredHeroes[i].SetAtkMultiplier(1.06f);
+                                break;
+                            case 2:
+                                CurrentHiredHeroes[i].SetHpMultiplier(1.25f);
+                                break;
+                        }
+                    }
+                }
+
+                if (CurrentHiredHeroes[i].GetName() == "Rogue")
+                {
+                    int index = CurrentHiredHeroes[i].GetSelectedSkill();
+                    switch (index)
+                    {
+                        case 0:
+                            CurrentHiredHeroes[i].SetAtkMultiplier(1.1f);
+                            break;
+                        case 1:
+                            CurrentHiredHeroes[i].SetAccMultiplier(1.1f);
+                            break;
+                        case 2:
+                            CurrentHiredHeroes[i].SetCritMultiplier(1.3f);
+                            break;
+                    }
+                }
+                if (CurrentHiredHeroes[i].GetName() == "Mage")
+                {
+                    int index = CurrentHiredHeroes[i].GetSelectedSkill();
+                    switch (index)
+                    {
+                        case 0:
+                            CurrentHiredHeroes[i].SetMatkMultiplier(1.1f);
+                            break;
+                        case 1:
+                            CurrentHiredHeroes[i].SetMatkMultiplier(1.05f);
+                            CurrentHiredHeroes[i].SetAccMultiplier(1.05f);
+                            break;
+                        case 2:
+                            CurrentHiredHeroes[i].SetAccMultiplier(1.1f);
+                            CurrentHiredHeroes[i].SetMatkMultiplier(1.1f);
+                            break;
+                    }
+                }
+            }
+        }
+
+        public static void UpdateSelectedSkill()
+        {
+            var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+            var con = new NpgsqlConnection(cs);
+            var UpdateSelectedSkill = $"UPDATE public.\"HiredHeroes\" SET \"SelectedSkill\" = {CurrentHiredHeroes[CurrentSelectedHeroIndex].GetSelectedSkill()} WHERE \"ID\" = {CurrentHiredHeroes[CurrentSelectedHeroIndex].GetID()}";
+            var cmd = new NpgsqlCommand(UpdateSelectedSkill, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
     }
 

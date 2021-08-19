@@ -262,5 +262,10 @@ namespace RPGv2
             skills.ShowDialog();
 
         }
+
+        private void HeroDetail_Activated(object sender, EventArgs e)
+        {
+            LabelsInit();
+        }
     }
 }

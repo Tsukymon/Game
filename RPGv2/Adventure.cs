@@ -16,8 +16,7 @@ namespace RPGv2
         {
             
             InitializeComponent();
-            label2.Text = SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].GetName();
-            label3.Text = $"Lvl: { SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].GetLvl()}";
+            
 
         }
 

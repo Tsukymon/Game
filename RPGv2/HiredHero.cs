@@ -16,15 +16,23 @@ namespace RPGv2
         float Acc;
         float Crit;
         float Def;
-        float Mdef;        
+        float Mdef;
         int Lvl;
         int PlayerID;
         int Exp;
         int ExpForNextLvl;
         bool LvldUp;
+        float HpMultiplier = 1; 
+        float AtkMultiplier = 1;
+        float MatkMultiplier = 1;
+        float AccMultiplier = 1;
+        float CritMultiplier = 1;
+        float DefMultiplier = 1;
+        float MdefMultiplier = 1;
+        int SelectedSkill;
 
 
-        public HiredHero(int id, string name, float hp, float atk, float matk, float acc, float crit, float def, float mdef, int lvl, int playerID, int exp, int expfornextlvl)
+        public HiredHero(int id, string name, float hp, float atk, float matk, float acc, float crit, float def, float mdef, int lvl, int playerID, int exp, int expfornextlvl, int selectedskill)
         {
             ID = id;
             Name = name;
@@ -39,7 +47,7 @@ namespace RPGv2
             PlayerID = playerID;
             Exp = exp;
             ExpForNextLvl = expfornextlvl;
-            
+            SelectedSkill = selectedskill;           
         }
 
         public string GetName()
@@ -49,37 +57,37 @@ namespace RPGv2
 
         public float GetHp()
         {
-            return Hp;
+            return Hp * HpMultiplier;
         }
 
         public float GetAtk()
         {
-            return Atk;
+            return Atk * AtkMultiplier;
         }
 
         public float GetMatk()
         {
-            return Matk;
+            return Matk * MatkMultiplier;
         }
 
         public float GetAcc()
         {
-            return Acc;
+            return Acc * AccMultiplier;
         }
 
         public float GetCrit()
         {
-            return Crit;
+            return Crit * CritMultiplier;
         }
 
         public float GetDef()
         {
-            return Def;
+            return Def * DefMultiplier;
         }
 
         public float GetMdef()
         {
-            return Mdef;
+            return Mdef * MdefMultiplier;
         }
 
         public int GetLvl()
@@ -176,6 +184,61 @@ namespace RPGv2
         public void SetAcc(float index)
         {
             Acc = Acc + index;
+        }
+
+        public void SetHpMultiplier(float index)
+        {
+            HpMultiplier = index;
+        }
+
+        public void SetAtkMultiplier(float index)
+        {
+            AtkMultiplier = index;
+        }
+
+        public void SetMatkMultiplier(float index)
+        {
+            MatkMultiplier = index;
+        }
+
+        public void SetAccMultiplier(float index)
+        {
+            AccMultiplier = index;
+        }
+
+        public void SetCritMultiplier(float index)
+        {
+            CritMultiplier = index;
+        }
+        public void SetDefMultiplier(float index)
+        {
+            DefMultiplier = index;
+        }
+
+        public void SetMdefMultiplier(float index)
+        {
+            MdefMultiplier = index;
+        }
+
+        public int GetSelectedSkill()
+        {
+            return SelectedSkill;
+        }
+
+        public void SetSelectedSkill(int index)
+        {
+            SelectedSkill = index;
+        }
+
+        public void ResetMultipliers()
+        {
+            HpMultiplier = 1;
+            AtkMultiplier = 1;
+            MatkMultiplier = 1;
+            AccMultiplier = 1;
+            CritMultiplier = 1;
+            DefMultiplier = 1;
+            MdefMultiplier = 1;
         }
     }
 }
