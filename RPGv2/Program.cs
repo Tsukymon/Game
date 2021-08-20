@@ -19,7 +19,7 @@ namespace RPGv2
             SQLSelections.LoadDefaultHeroes();
             SQLSelections.LoadExpCurve();
             SQLSelections.LoadGear();
-            
+            SQLSelections.LoadItems();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

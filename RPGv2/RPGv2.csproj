@@ -101,6 +101,7 @@
       <DependentUpon>CombatReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Creature.cs" />
+    <Compile Include="DropCalculation.cs" />
     <Compile Include="ExpCurve.cs" />
     <Compile Include="Gear.cs" />
     <Compile Include="Hero.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Inventory.Designer.cs">
       <DependentUpon>Inventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Items.cs" />
     <Compile Include="LoadPlayer.cs">
       <SubType>Form</SubType>
     </Compile>

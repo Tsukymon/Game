@@ -85,6 +85,14 @@ namespace RPGv2
                 SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].CalculateLvl(SQLSelections.ExpCurve[SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].GetLvl()].GetExp());
                 SQLSelections.UpdateLvl();
                 SQLSelections.UpdateExpForNextLvl();
+
+                DropCalculation dropCalculation = new DropCalculation(SQLSelections.SelectedCreatureIndex);
+                dropCalculation.CalculateSlot1();
+                dropCalculation.CalculateSlot2();
+                dropCalculation.CalculateSlot3();
+                dropCalculation.CalculateSlot4();
+
+                //LIST DROPS HERE
             }
             else
             {

@@ -58,9 +58,6 @@ namespace RPGv2
             this.Close();
         }
 
-        private void pictureBox1_MouseHover(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

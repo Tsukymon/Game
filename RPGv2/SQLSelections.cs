@@ -22,6 +22,7 @@ namespace RPGv2
         public static List<ExpCurve> ExpCurve = new List<ExpCurve>();
         public static List<Gear> LoadedGear = new List<Gear>();
         public static List<AvailableGear> AvailableGear = new List<AvailableGear>();
+        public static List<Items> Items = new List<Items>();
 
         
         
@@ -41,7 +42,7 @@ namespace RPGv2
 
             while (rdr.Read())
             {
-                LoadedCreatures.Add(new Creature(rdr.GetInt32(0), rdr.GetString(1), rdr.GetFloat(2), rdr.GetFloat(3), rdr.GetFloat(4), rdr.GetFloat(5), rdr.GetFloat(6), rdr.GetFloat(7), rdr.GetInt32(8)));
+                LoadedCreatures.Add(new Creature(rdr.GetInt32(0), rdr.GetString(1), rdr.GetFloat(2), rdr.GetFloat(3), rdr.GetFloat(4), rdr.GetFloat(5), rdr.GetFloat(6), rdr.GetFloat(7), rdr.GetInt32(8), rdr.GetString(9), rdr.GetString(10), rdr.GetString(11), rdr.GetString(12)));
             }
             con.Close();
         }
@@ -431,6 +432,21 @@ namespace RPGv2
             var cmd = new NpgsqlCommand(UpdateSelectedSkill, con);
             con.Open();
             cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        public static void LoadItems()
+        {
+            var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+            var con = new NpgsqlConnection(cs);
+            var LoadItems = $"SELECT * FROM public.\"Items\"";
+            var cmd = new NpgsqlCommand(LoadItems, con);
+            con.Open();
+            NpgsqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                Items.Add(new Items(rdr.GetInt32(0), rdr.GetString(1)));
+            }
             con.Close();
         }
     }

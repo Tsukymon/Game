@@ -48,5 +48,52 @@ namespace RPGv2
             Attack attack = new Attack(3);
             attack.ShowDialog();
         }
+
+        
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+            SQLSelections.SelectedCreatureIndex = 4;
+            Attack attack = new Attack(4);
+            attack.ShowDialog();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+            SQLSelections.SelectedCreatureIndex = 5;
+            Attack attack = new Attack(5);
+            attack.ShowDialog();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+            SQLSelections.SelectedCreatureIndex = 6;
+            Attack attack = new Attack(6);
+            attack.ShowDialog();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+            SQLSelections.SelectedCreatureIndex = 7;
+            Attack attack = new Attack(7);
+            attack.ShowDialog();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+            SQLSelections.SelectedCreatureIndex = 8;
+            Attack attack = new Attack(8);
+            attack.ShowDialog();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }
