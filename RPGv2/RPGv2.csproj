@@ -94,6 +94,7 @@
       <DependentUpon>Attack.cs</DependentUpon>
     </Compile>
     <Compile Include="AvailableGear.cs" />
+    <Compile Include="AvailableLoot.cs" />
     <Compile Include="CombatReport.cs">
       <SubType>Form</SubType>
     </Compile>

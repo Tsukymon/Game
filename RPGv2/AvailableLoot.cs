@@ -6,25 +6,19 @@ using System.Threading.Tasks;
 
 namespace RPGv2
 {
-    class Items
+    class AvailableLoot
     {
         int ID;
         string Name;
+        int Count;
+        int PlayerID;
 
-        public Items(int id, string name)
+        public AvailableLoot(int id, string name, int count, int playerID)
         {
             ID = id;
             Name = name;
-        }
-
-        public int GetID()
-        {
-            return ID;
-        }
-
-        public string GetName()
-        {
-            return Name;
+            Count = count;
+            PlayerID = playerID;
         }
     }
 }

@@ -22,8 +22,11 @@ namespace RPGv2
             if(textBox1.Text != "")
             {
                 SQLSelections.AddNewPlayer(textBox1.Text);
+                SQLSelections.AddNewPlayerTabs(textBox1.Text);
                 SQLSelections.LoadHiredHeroes();
                 SQLSelections.LoadAvailableGear();
+                SQLSelections.LoadItems();
+                
 
                 this.Hide();
                 MainGameScreen mainGameScreen = new MainGameScreen();

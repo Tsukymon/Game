@@ -35,7 +35,7 @@ namespace RPGv2
         {
             var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
             var con = new NpgsqlConnection(cs);
-            var LoadCreatures = $"SELECT * FROM public.\"Creature\"";
+            var LoadCreatures = $"SELECT * FROM public.\"Creature\" ORDER BY \"ID\"";
             var cmd = new NpgsqlCommand(LoadCreatures, con);
             con.Open();
             NpgsqlDataReader rdr = cmd.ExecuteReader();
@@ -108,6 +108,21 @@ namespace RPGv2
             PlayerMaxID++;
             CurrentPlayerID = PlayerMaxID;
 
+        }
+
+        public static void AddNewPlayerTabs(string name)
+        {
+            var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+            var con = new NpgsqlConnection(cs);
+            var TabCreation = $"CREATE TABLE \"{name}-Items\" AS SELECT * FROM public.\"Items\"";
+            var TabCreation2 = $"INSERT INTO \"{name}-Items\" SELECT * FROM \"Items\"";
+            var cmd = new NpgsqlCommand(TabCreation, con);
+            var cmd2 = new NpgsqlCommand(TabCreation2, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            cmd2.ExecuteNonQuery();
+
+            con.Close();
         }
 
         public static void SetCurrentPlayerID(string name)
@@ -439,7 +454,7 @@ namespace RPGv2
         {
             var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
             var con = new NpgsqlConnection(cs);
-            var LoadItems = $"SELECT * FROM public.\"Items\"";
+            var LoadItems = $"SELECT * FROM public.\"Items\" ORDER BY \"ID\"";
             var cmd = new NpgsqlCommand(LoadItems, con);
             con.Open();
             NpgsqlDataReader rdr = cmd.ExecuteReader();
@@ -448,6 +463,20 @@ namespace RPGv2
                 Items.Add(new Items(rdr.GetInt32(0), rdr.GetString(1)));
             }
             con.Close();
+        }
+
+        public static void UpdateItems(string name, int id, int count)
+        {
+            var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+            var con = new NpgsqlConnection(cs);
+            var UpdateItems = $"UPDATE public.\"{name}-Items\" SET \"Count\" = \"Count\" + {count} WHERE \"ID\" = {id}";
+            
+            var cmd = new NpgsqlCommand(UpdateItems, con);
+            
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+
         }
     }
 

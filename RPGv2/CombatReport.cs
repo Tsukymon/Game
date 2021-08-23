@@ -20,6 +20,10 @@ namespace RPGv2
         float HeroHp = SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].GetHp();
         float CreatureHp = SQLSelections.LoadedCreatures[SQLSelections.SelectedCreatureIndex].GetHp();
 
+        List<PictureBox> pictureBoxes = new List<PictureBox>();
+        List<ToolTip> toolTips = new List<ToolTip>();
+        
+
         public CombatReport()
         {
             InitializeComponent();
@@ -76,7 +80,9 @@ namespace RPGv2
             if (CreatureHp <= 0)
             {
                 // CREATURE DIED HERE
-                CreatureHp = 0;
+                CreatureHp = 0;              
+                int x = 0;
+                int counter = 0;
                 textBox1.AppendText($"\r\n{SQLSelections.LoadedCreatures[SQLSelections.SelectedCreatureIndex].GetName()} has died");
                 button1.Enabled = false;
                 button2.Visible = true;
@@ -91,6 +97,81 @@ namespace RPGv2
                 dropCalculation.CalculateSlot2();
                 dropCalculation.CalculateSlot3();
                 dropCalculation.CalculateSlot4();
+                this.Size = new Size(460, 475);
+                label7.Visible = true;
+
+                if(dropCalculation.GetSlot1Flag() == 1)
+                {
+                    pictureBoxes.Add(new PictureBox());
+                    toolTips.Add(new ToolTip());
+                    
+
+
+                    this.Controls.Add(pictureBoxes[counter]);
+                    pictureBoxes[counter].Visible = true;
+                    pictureBoxes[counter].Location = new Point(15 + x, 360);
+                    pictureBoxes[counter].Size = new Size(70, 70);
+                    pictureBoxes[counter].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\Drops\{dropCalculation.GetSlot1()}.png");
+                    toolTips[counter].SetToolTip(pictureBoxes[counter], $"{SQLSelections.Items[dropCalculation.GetSlot1()-1].GetName()} {dropCalculation.GetSlot1Count()}x");
+                    
+   
+                    counter++;
+                    x += 82;
+
+                    SQLSelections.UpdateItems(SQLSelections.LoadedPlayers[SQLSelections.CurrentPlayerID-1].GetName(), dropCalculation.GetSlot1(), dropCalculation.GetSlot1Count());
+                }
+
+                if (dropCalculation.GetSlot2Flag() == 1)
+                {
+                    pictureBoxes.Add(new PictureBox());
+                    toolTips.Add(new ToolTip());
+
+                    this.Controls.Add(pictureBoxes[counter]);
+                    pictureBoxes[counter].Visible = true;
+                    pictureBoxes[counter].Location = new Point(15 + x, 360);
+                    pictureBoxes[counter].Size = new Size(70, 70);
+                    pictureBoxes[counter].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\Drops\{dropCalculation.GetSlot2()}.png");
+                    toolTips[counter].SetToolTip(pictureBoxes[counter], $"{SQLSelections.Items[dropCalculation.GetSlot2() - 1].GetName()} {dropCalculation.GetSlot2Count()}x");
+                    counter++;
+                    x += 82;
+                    SQLSelections.UpdateItems(SQLSelections.LoadedPlayers[SQLSelections.CurrentPlayerID - 1].GetName(), dropCalculation.GetSlot2(), dropCalculation.GetSlot2Count());
+
+                }
+
+                if (dropCalculation.GetSlot3Flag() == 1)
+                {
+                    pictureBoxes.Add(new PictureBox());
+                    toolTips.Add(new ToolTip());
+
+                    this.Controls.Add(pictureBoxes[counter]);
+                    pictureBoxes[counter].Visible = true;
+                    pictureBoxes[counter].Location = new Point(15 + x, 360);
+                    pictureBoxes[counter].Size = new Size(70, 70);
+                    pictureBoxes[counter].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\Drops\{dropCalculation.GetSlot3()}.png");
+                    toolTips[counter].SetToolTip(pictureBoxes[counter], $"{SQLSelections.Items[dropCalculation.GetSlot3() - 1].GetName()} {dropCalculation.GetSlot3Count()}x");
+                    counter++;
+                    x += 82;
+                    SQLSelections.UpdateItems(SQLSelections.LoadedPlayers[SQLSelections.CurrentPlayerID - 1].GetName(), dropCalculation.GetSlot3(), dropCalculation.GetSlot3Count());
+
+                }
+
+                if (dropCalculation.GetSlot4Flag() == 1)
+                {
+                    pictureBoxes.Add(new PictureBox());
+                    toolTips.Add(new ToolTip());
+
+                    this.Controls.Add(pictureBoxes[counter]);
+                    pictureBoxes[counter].Visible = true;
+                    pictureBoxes[counter].Location = new Point(15 + x, 360);
+                    pictureBoxes[counter].Size = new Size(70, 70);
+                    pictureBoxes[counter].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\Drops\{dropCalculation.GetSlot4()}.png");
+                    toolTips[counter].SetToolTip(pictureBoxes[counter], $"{SQLSelections.Items[dropCalculation.GetSlot4() - 1].GetName()} {dropCalculation.GetSlot4Count()}x");
+                    counter++;
+                    x += 82;
+                    SQLSelections.UpdateItems(SQLSelections.LoadedPlayers[SQLSelections.CurrentPlayerID - 1].GetName(), dropCalculation.GetSlot4(), dropCalculation.GetSlot4Count());
+
+                }
+
 
                 //LIST DROPS HERE
             }

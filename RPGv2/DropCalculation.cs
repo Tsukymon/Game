@@ -17,6 +17,11 @@ namespace RPGv2
         int Slot2Count;
         int Slot3Count;
         int Slot4Count;
+        int Slot1Flag = 0;
+        int Slot2Flag = 0;
+        int Slot3Flag = 0;
+        int Slot4Flag = 0;
+        Random random = new Random();
 
         public DropCalculation(int creatureIndex)
         {
@@ -33,7 +38,6 @@ namespace RPGv2
                 string[] Slot1Amounts = Slot1Parse[1].Split(',');
                 string[] Slot1Chances = Slot1Parse[2].Split(',');
 
-                Random random = new Random();
                 int RandomNumber = random.Next(1, 100);
                 int[] ScalingChances = new int[Slot1PossibleItems.Length];
 
@@ -54,8 +58,9 @@ namespace RPGv2
                     if(ScalingChances[i] >= RandomNumber)
                     {
                         Slot1 = Int32.Parse(Slot1PossibleItems[i]);
-                        int Count = random.Next(1, Int32.Parse(Slot1Amounts[i]));
+                        int Count = random.Next(1, Int32.Parse(Slot1Amounts[i])+1);
                         Slot1Count = Count;
+                        Slot1Flag = 1;
                         break;
                     }
                     else
@@ -82,7 +87,6 @@ namespace RPGv2
                 string[] Slot2Amounts = Slot2Parse[1].Split(',');
                 string[] Slot1Chances = Slot2Parse[2].Split(',');
 
-                Random random = new Random();
                 int RandomNumber = random.Next(1, 100);
                 int[] ScalingChances = new int[Slot2PossibleItems.Length];
 
@@ -103,8 +107,9 @@ namespace RPGv2
                     if (ScalingChances[i] >= RandomNumber)
                     {
                         Slot2 = Int32.Parse(Slot2PossibleItems[i]);
-                        int Count = random.Next(1, Int32.Parse(Slot2Amounts[i]));
+                        int Count = random.Next(1, Int32.Parse(Slot2Amounts[i])+1);
                         Slot2Count = Count;
+                        Slot2Flag = 1;
                         break;
                     }
                     else
@@ -135,7 +140,6 @@ namespace RPGv2
                 string[] Slot3Amounts = Slot3Parse[1].Split(',');
                 string[] Slot3Chances = Slot3Parse[2].Split(',');
 
-                Random random = new Random();
                 int RandomNumber = random.Next(1, 100);
                 int[] ScalingChances = new int[Slot3PossibleItems.Length];
 
@@ -159,8 +163,9 @@ namespace RPGv2
                     if (ScalingChances[i] >= RandomNumber)
                     {
                         Slot3 = Int32.Parse(Slot3PossibleItems[i]);
-                        int Count = random.Next(1, Int32.Parse(Slot3Amounts[i]));
+                        int Count = random.Next(1, Int32.Parse(Slot3Amounts[i])+1);
                         Slot3Count = Count;
+                        Slot3Flag = 1;
                         break;
                     }
                     else
@@ -191,7 +196,6 @@ namespace RPGv2
                 string[] Slot4Amounts = Slot4Parse[1].Split(',');
                 string[] Slot4Chances = Slot4Parse[2].Split(',');
 
-                Random random = new Random();
                 int RandomNumber = random.Next(1, 100);
                 int[] ScalingChances = new int[Slot4PossibleItems.Length];
 
@@ -215,8 +219,9 @@ namespace RPGv2
                     if (ScalingChances[i] >= RandomNumber)
                     {
                         Slot4 = Int32.Parse(Slot4PossibleItems[i]);
-                        int Count = random.Next(1, Int32.Parse(Slot4Amounts[i]));
+                        int Count = random.Next(1, Int32.Parse(Slot4Amounts[i])+1);
                         Slot4Count = Count;
+                        Slot4Flag = 1;
                         break;
                     }
                     else
@@ -235,6 +240,71 @@ namespace RPGv2
 
 
 
+        }
+
+        public int GetTotalDropCount()
+        {
+            return Slot1Flag + Slot2Flag + Slot3Flag + Slot4Flag;
+        }
+
+        public int GetSlot1()
+        {
+            return Slot1;
+        }
+
+        public int GetSlot2()
+        {
+            return Slot2;
+        }
+
+        public int GetSlot3()
+        {
+            return Slot3;
+        }
+
+        public int GetSlot4()
+        {
+            return Slot4;
+        }
+
+        public int GetSlot1Flag()
+        {
+            return Slot1Flag;
+        }
+
+        public int GetSlot2Flag()
+        {
+            return Slot2Flag;
+        }
+
+        public int GetSlot3Flag()
+        {
+            return Slot3Flag;
+        }
+
+        public int GetSlot4Flag()
+        {
+            return Slot4Flag;
+        }
+
+        public int GetSlot1Count()
+        {
+            return Slot1Count;
+        }
+
+        public int GetSlot2Count()
+        {
+            return Slot2Count;
+        }
+
+        public int GetSlot3Count()
+        {
+            return Slot3Count;
+        }
+
+        public int GetSlot4Count()
+        {
+            return Slot4Count;
         }
     }
 }
