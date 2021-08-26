@@ -119,9 +119,10 @@ namespace RPGv2
                     x += 82;
 
                     SQLSelections.UpdateItems(SQLSelections.LoadedPlayers[SQLSelections.CurrentPlayerID-1].GetName(), dropCalculation.GetSlot1(), dropCalculation.GetSlot1Count());
+                    SQLSelections.PlayersItems[dropCalculation.GetSlot1() - 1].IncrementCount(dropCalculation.GetSlot1Count());
                 }
 
-                if (dropCalculation.GetSlot2Flag() == 1)
+                if(dropCalculation.GetSlot2Flag() == 1)
                 {
                     pictureBoxes.Add(new PictureBox());
                     toolTips.Add(new ToolTip());
@@ -135,10 +136,10 @@ namespace RPGv2
                     counter++;
                     x += 82;
                     SQLSelections.UpdateItems(SQLSelections.LoadedPlayers[SQLSelections.CurrentPlayerID - 1].GetName(), dropCalculation.GetSlot2(), dropCalculation.GetSlot2Count());
-
+                    SQLSelections.PlayersItems[dropCalculation.GetSlot2() - 1].IncrementCount(dropCalculation.GetSlot2Count());
                 }
 
-                if (dropCalculation.GetSlot3Flag() == 1)
+                if(dropCalculation.GetSlot3Flag() == 1)
                 {
                     pictureBoxes.Add(new PictureBox());
                     toolTips.Add(new ToolTip());
@@ -152,10 +153,10 @@ namespace RPGv2
                     counter++;
                     x += 82;
                     SQLSelections.UpdateItems(SQLSelections.LoadedPlayers[SQLSelections.CurrentPlayerID - 1].GetName(), dropCalculation.GetSlot3(), dropCalculation.GetSlot3Count());
-
+                    SQLSelections.PlayersItems[dropCalculation.GetSlot3() - 1].IncrementCount(dropCalculation.GetSlot3Count());
                 }
 
-                if (dropCalculation.GetSlot4Flag() == 1)
+                if(dropCalculation.GetSlot4Flag() == 1)
                 {
                     pictureBoxes.Add(new PictureBox());
                     toolTips.Add(new ToolTip());
@@ -169,7 +170,7 @@ namespace RPGv2
                     counter++;
                     x += 82;
                     SQLSelections.UpdateItems(SQLSelections.LoadedPlayers[SQLSelections.CurrentPlayerID - 1].GetName(), dropCalculation.GetSlot4(), dropCalculation.GetSlot4Count());
-
+                    SQLSelections.PlayersItems[dropCalculation.GetSlot4() - 1].IncrementCount(dropCalculation.GetSlot4Count());
                 }
 
 

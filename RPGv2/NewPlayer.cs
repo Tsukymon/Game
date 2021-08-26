@@ -23,9 +23,14 @@ namespace RPGv2
             {
                 SQLSelections.AddNewPlayer(textBox1.Text);
                 SQLSelections.AddNewPlayerTabs(textBox1.Text);
+                SQLSelections.AddBasicGear();
                 SQLSelections.LoadHiredHeroes();
                 SQLSelections.LoadAvailableGear();
                 SQLSelections.LoadItems();
+                SQLSelections.LoadPlayersItems(textBox1.Text);
+
+
+                MessageBox.Show("Profile created!!\r\nYou recieved some basic weapons to help you in the start.", "Welcome");
                 
 
                 this.Hide();

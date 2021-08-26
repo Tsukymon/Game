@@ -20,6 +20,7 @@ namespace RPGv2
             SQLSelections.LoadExpCurve();
             SQLSelections.LoadGear();
             SQLSelections.LoadItems();
+            SQLSelections.GetAvailableGearMaxID();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -10,11 +10,13 @@ namespace RPGv2
     {
         int ID;
         string Name;
+        int Count;
 
-        public Items(int id, string name)
+        public Items(int id, string name, int count)
         {
             ID = id;
             Name = name;
+            Count = count;
         }
 
         public int GetID()
@@ -25,6 +27,16 @@ namespace RPGv2
         public string GetName()
         {
             return Name;
+        }
+
+        public int GetCount()
+        {
+            return Count;
+        }
+
+        public void IncrementCount(int index)
+        {
+            Count = Count + index;
         }
     }
 }

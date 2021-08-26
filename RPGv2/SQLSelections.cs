@@ -10,6 +10,7 @@ namespace RPGv2
     class SQLSelections
     {
         public static int PlayerMaxID = 0;
+        public static int AvailableGearMaxID = 0;
         public static int CurrentPlayerID = 0;
         public static int CurrentSelectedHeroIndex = 0;
         public static int SelectedCreatureIndex = 0;       
@@ -23,6 +24,7 @@ namespace RPGv2
         public static List<Gear> LoadedGear = new List<Gear>();
         public static List<AvailableGear> AvailableGear = new List<AvailableGear>();
         public static List<Items> Items = new List<Items>();
+        public static List<Items> PlayersItems = new List<Items>();
 
         
         
@@ -115,12 +117,12 @@ namespace RPGv2
             var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
             var con = new NpgsqlConnection(cs);
             var TabCreation = $"CREATE TABLE \"{name}-Items\" AS SELECT * FROM public.\"Items\"";
-            var TabCreation2 = $"INSERT INTO \"{name}-Items\" SELECT * FROM \"Items\"";
+            //var TabCreation2 = $"INSERT INTO \"{name}-Items\" SELECT * FROM \"Items\"";
             var cmd = new NpgsqlCommand(TabCreation, con);
-            var cmd2 = new NpgsqlCommand(TabCreation2, con);
+            //var cmd2 = new NpgsqlCommand(TabCreation2, con);
             con.Open();
             cmd.ExecuteNonQuery();
-            cmd2.ExecuteNonQuery();
+            //cmd2.ExecuteNonQuery();
 
             con.Close();
         }
@@ -171,7 +173,7 @@ namespace RPGv2
             cmd.ExecuteNonQuery();
             con.Close();
 
-            CurrentHiredHeroes.Add(new HiredHero(GetHiredHeroesMaxIndex() + 1, LoadedDefaultHeroes[index].GetName(), LoadedDefaultHeroes[index].GetHp(), LoadedDefaultHeroes[index].GetAtk(), LoadedDefaultHeroes[index].GetMatk(), LoadedDefaultHeroes[index].GetAcc(), LoadedDefaultHeroes[index].GetCrit(), LoadedDefaultHeroes[index].GetDef(), LoadedDefaultHeroes[index].GetMdef(), 1, CurrentPlayerID, 0, 10, -1));
+            CurrentHiredHeroes.Add(new HiredHero(GetHiredHeroesMaxIndex(), LoadedDefaultHeroes[index].GetName(), LoadedDefaultHeroes[index].GetHp(), LoadedDefaultHeroes[index].GetAtk(), LoadedDefaultHeroes[index].GetMatk(), LoadedDefaultHeroes[index].GetAcc(), LoadedDefaultHeroes[index].GetCrit(), LoadedDefaultHeroes[index].GetDef(), LoadedDefaultHeroes[index].GetMdef(), 1, CurrentPlayerID, 0, 10, -1));
             
         }
 
@@ -298,7 +300,7 @@ namespace RPGv2
             var cmd = new NpgsqlCommand(LoadAvailableGear, con);
             con.Open();
             NpgsqlDataReader rdr = cmd.ExecuteReader();
-
+            AvailableGear.Clear();
             if(rdr.HasRows)
             {
                 while (rdr.Read())
@@ -452,6 +454,7 @@ namespace RPGv2
 
         public static void LoadItems()
         {
+            Items.Clear();
             var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
             var con = new NpgsqlConnection(cs);
             var LoadItems = $"SELECT * FROM public.\"Items\" ORDER BY \"ID\"";
@@ -460,7 +463,23 @@ namespace RPGv2
             NpgsqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                Items.Add(new Items(rdr.GetInt32(0), rdr.GetString(1)));
+                Items.Add(new Items(rdr.GetInt32(0), rdr.GetString(1), rdr.GetInt32(2)));
+            }
+            con.Close();
+        }
+
+        public static void LoadPlayersItems(string name)
+        {
+            PlayersItems.Clear();
+            var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+            var con = new NpgsqlConnection(cs);
+            var LoadItems = $"SELECT * FROM public.\"{name}-Items\" ORDER BY \"ID\"";
+            var cmd = new NpgsqlCommand(LoadItems, con);
+            con.Open();
+            NpgsqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                PlayersItems.Add(new Items(rdr.GetInt32(0), rdr.GetString(1), rdr.GetInt32(2)));
             }
             con.Close();
         }
@@ -477,6 +496,47 @@ namespace RPGv2
             cmd.ExecuteNonQuery();
             con.Close();
 
+        }
+
+        public static void GetAvailableGearMaxID()
+        {
+            var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+            var con = new NpgsqlConnection(cs);
+            var GetMaxAvailableGearID = $"SELECT MAX(\"ID\") FROM public.\"AvailableGear\"";
+            var LoadAvailableGear = $"SELECT * FROM \"AvailableGear\"";
+            var cmd = new NpgsqlCommand(GetMaxAvailableGearID, con);
+            var cmd2 = new NpgsqlCommand(LoadAvailableGear, con);
+            con.Open();
+            NpgsqlDataReader rdr = cmd2.ExecuteReader();
+            if(rdr.HasRows)
+            {
+                con.Close();
+                con.Open();
+                AvailableGearMaxID = (Int32)cmd.ExecuteScalar();
+                con.Close();
+            }
+            
+        }
+
+        public static void AddBasicGear()
+        {
+            var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+            var con = new NpgsqlConnection(cs);
+            var AddBasicGear1 = $"INSERT INTO public.\"AvailableGear\" VALUES({AvailableGearMaxID + 1},{LoadedGear[0].GetGearType()},{LoadedGear[0].GetLvlReq()},{LoadedGear[0].GetHp()},{LoadedGear[0].GetAtk()},{LoadedGear[0].GetMatk()},{LoadedGear[0].GetAcc()},{LoadedGear[0].GetCrit()},{LoadedGear[0].GetDef()},{LoadedGear[0].GetMdef()},'{LoadedGear[0].GetName()}',{CurrentPlayerID},{false},-2,-1)";
+            var AddBasicGear2 = $"INSERT INTO public.\"AvailableGear\" VALUES({AvailableGearMaxID + 2},{LoadedGear[1].GetGearType()},{LoadedGear[1].GetLvlReq()},{LoadedGear[1].GetHp()},{LoadedGear[1].GetAtk()},{LoadedGear[1].GetMatk()},{LoadedGear[1].GetAcc()},{LoadedGear[1].GetCrit()},{LoadedGear[1].GetDef()},{LoadedGear[1].GetMdef()},'{LoadedGear[1].GetName()}',{CurrentPlayerID},{false},-2,-1)";
+            var AddBasicGear3 = $"INSERT INTO public.\"AvailableGear\" VALUES({AvailableGearMaxID + 3},{LoadedGear[2].GetGearType()},{LoadedGear[2].GetLvlReq()},{LoadedGear[2].GetHp()},{LoadedGear[2].GetAtk()},{LoadedGear[2].GetMatk()},{LoadedGear[2].GetAcc()},{LoadedGear[2].GetCrit()},{LoadedGear[2].GetDef()},{LoadedGear[2].GetMdef()},'{LoadedGear[2].GetName()}',{CurrentPlayerID},{false},-2,-1)";
+
+            var cmd1 = new NpgsqlCommand(AddBasicGear1, con);
+            var cmd2 = new NpgsqlCommand(AddBasicGear2, con);
+            var cmd3 = new NpgsqlCommand(AddBasicGear3, con);
+
+
+            con.Open();
+            cmd1.ExecuteNonQuery();
+            cmd2.ExecuteNonQuery();
+            cmd3.ExecuteNonQuery();
+            con.Close();
+            AvailableGearMaxID += 3;
         }
     }
 
