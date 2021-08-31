@@ -29,7 +29,11 @@ namespace RPGv2
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBox1.Text = $"HP: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetHp()}\r\nAtk: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetAtk()}\r\nMatk: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetMatk()}\r\nAcc: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetAcc()}\r\nCrit: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetCrit()}\r\nDef: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetDef()}\r\nMdef: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetMdef()}";
+            if(listBox1.SelectedIndex > -1)
+            {
+                textBox1.Text = $"HP: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetHp()}\r\nAtk: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetAtk()}\r\nMatk: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetMatk()}\r\nAcc: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetAcc()}\r\nCrit: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetCrit()}\r\nDef: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetDef()}\r\nMdef: {SQLSelections.LoadedDefaultHeroes[listBox1.SelectedIndex].GetMdef()}";
+
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -39,6 +43,11 @@ namespace RPGv2
                 this.Close();
                 SQLSelections.HireHero(listBox1.SelectedIndex);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

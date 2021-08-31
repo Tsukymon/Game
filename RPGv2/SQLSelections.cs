@@ -25,6 +25,7 @@ namespace RPGv2
         public static List<AvailableGear> AvailableGear = new List<AvailableGear>();
         public static List<Items> Items = new List<Items>();
         public static List<Items> PlayersItems = new List<Items>();
+        public static List<Crafting> CraftingItems = new List<Crafting>();
 
         
         
@@ -537,6 +538,58 @@ namespace RPGv2
             cmd3.ExecuteNonQuery();
             con.Close();
             AvailableGearMaxID += 3;
+        }
+
+        public static void LoadCraftingItems()
+        {
+            CurrentHiredHeroes.Clear();
+            var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+            var con = new NpgsqlConnection(cs);
+            var LoadGearCraft = $"SELECT * FROM public.\"GearCraft\"";
+            var cmd = new NpgsqlCommand(LoadGearCraft, con);
+            con.Open();
+            NpgsqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                CraftingItems.Add(new Crafting(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetInt32(2), rdr.GetInt32(3), rdr.GetInt32(4), rdr.GetInt32(5), rdr.GetInt32(6), rdr.GetInt32(7), rdr.GetInt32(8), rdr.GetInt32(9), rdr.GetString(10), rdr.GetInt32(11), rdr.GetString(12), rdr.GetString(13), rdr.GetString(14), rdr.GetString(15)));
+
+            }
+            con.Close();
+        }
+
+        public static void CraftItem(string name, int id)
+        {
+            if(id < 10000)
+            {
+                for(int i = 0; i < CraftingItems.Count; i++)
+                {
+                    if(CraftingItems[i].GetID() == id)
+                    {
+                        var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+                        var con = new NpgsqlConnection(cs);
+                        var AddGear = $"INSERT INTO public.\"AvailableGear\" VALUES({AvailableGearMaxID + 1},{CraftingItems[i].GetGearType()},{CraftingItems[i].GetLvlReq()},{CraftingItems[i].GetHp()},{CraftingItems[i].GetAtk()},{CraftingItems[i].GetMatk()},{CraftingItems[i].GetAcc()},{CraftingItems[i].GetCrit()},{CraftingItems[i].GetDef()},{CraftingItems[i].GetMdef()},'{CraftingItems[i].GetName()}',{CurrentPlayerID},{false},-2,-1)";
+                        var cmd = new NpgsqlCommand(AddGear, con);
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        break;
+                    }
+                }
+                              
+            }
+            else
+            {
+                id = id - 10000;
+                var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+                var con = new NpgsqlConnection(cs);
+                var AddItem = $"UPDATE public.\"{name}-Items\" SET \"Count\" = \"Count\" + 1 WHERE \"ID\" = {id}";
+                var cmd = new NpgsqlCommand(AddItem, con);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                
+            }
         }
     }
 

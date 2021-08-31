@@ -101,6 +101,19 @@
     <Compile Include="CombatReport.Designer.cs">
       <DependentUpon>CombatReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Crafters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Crafters.Designer.cs">
+      <DependentUpon>Crafters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Crafting.cs" />
+    <Compile Include="CraftingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CraftingDialog.Designer.cs">
+      <DependentUpon>CraftingDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Creature.cs" />
     <Compile Include="DropCalculation.cs" />
     <Compile Include="ExpCurve.cs" />
@@ -174,6 +187,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CombatReport.resx">
       <DependentUpon>CombatReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Crafters.resx">
+      <DependentUpon>Crafters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CraftingDialog.resx">
+      <DependentUpon>CraftingDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HeroDetail.resx">
       <DependentUpon>HeroDetail.cs</DependentUpon>

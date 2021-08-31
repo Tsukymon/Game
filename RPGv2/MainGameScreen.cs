@@ -31,5 +31,12 @@ namespace RPGv2
             Inventory inventory = new Inventory();
             inventory.ShowDialog();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Crafters crafters = new Crafters();
+            crafters.ShowDialog();
+
+        }
     }
 }
