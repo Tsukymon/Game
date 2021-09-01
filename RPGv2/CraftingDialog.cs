@@ -50,6 +50,7 @@ namespace RPGv2
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             DeletePics();
             pictureBoxes.Clear();
             count = 0;
@@ -76,7 +77,7 @@ namespace RPGv2
                 toolTips.Add(new ToolTip());
                 pictureBoxes.Add(new PictureBox());
                 this.Controls.Add(pictureBoxes[count]);
-                pictureBoxes[count].Location = new Point(12 + x, 50);
+                pictureBoxes[count].Location = new Point(12 + x, 60);
                 pictureBoxes[count].Size = new Size(70, 70);
                 pictureBoxes[count].Visible = true;
                 pictureBoxes[count].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\Drops\{Slot1ID}.png");
@@ -98,7 +99,7 @@ namespace RPGv2
                 toolTips.Add(new ToolTip());
 
                 this.Controls.Add(pictureBoxes[count]);
-                pictureBoxes[count].Location = new Point(12 + x, 50);
+                pictureBoxes[count].Location = new Point(12 + x, 60);
                 pictureBoxes[count].Size = new Size(70, 70);
                 pictureBoxes[count].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\Drops\{Slot2ID}.png");
                 toolTips[count].SetToolTip(pictureBoxes[count], $"{Slot2Amount}x");
@@ -118,7 +119,7 @@ namespace RPGv2
                 toolTips.Add(new ToolTip());
 
                 this.Controls.Add(pictureBoxes[count]);
-                pictureBoxes[count].Location = new Point(12 + x, 50);
+                pictureBoxes[count].Location = new Point(12 + x, 60);
                 pictureBoxes[count].Size = new Size(70, 70);
                 pictureBoxes[count].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\Drops\{Slot3ID}.png");
                 toolTips[count].SetToolTip(pictureBoxes[count], $"{Slot3Amount}x");
@@ -137,7 +138,7 @@ namespace RPGv2
                 toolTips.Add(new ToolTip());
 
                 this.Controls.Add(pictureBoxes[count]);
-                pictureBoxes[count].Location = new Point(12 + x, 50);
+                pictureBoxes[count].Location = new Point(12 + x, 60);
                 pictureBoxes[count].Size = new Size(70, 70);
                 pictureBoxes[count].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\Drops\{Slot4ID}.png");
                 toolTips[count].SetToolTip(pictureBoxes[count], $"{Slot4Amount}x");
@@ -147,7 +148,9 @@ namespace RPGv2
 
             }
 
-            
+            LabelsInit();
+
+
 
 
         }
@@ -295,6 +298,25 @@ namespace RPGv2
             Slot2Amount = 0;
             Slot3Amount = 0;
             Slot4Amount = 0;
+        }
+
+        private void LabelsInit()
+        {
+            for(int i = 0; i < SQLSelections.CraftingItems.Count; i++)
+            {
+                if(SQLSelections.CraftingItems[i].GetName() == SelectedName)
+                {
+                    label1.Text = $"Hp: {SQLSelections.CraftingItems[i].GetHp().ToString()}";
+                    label2.Text = $"Atk: {SQLSelections.CraftingItems[i].GetAtk().ToString()}";
+                    label3.Text = $"Matk: {SQLSelections.CraftingItems[i].GetMatk().ToString()}";
+                    label4.Text = $"Acc: {SQLSelections.CraftingItems[i].GetAcc().ToString()}";
+                    label5.Text = $"Crit: {SQLSelections.CraftingItems[i].GetCrit().ToString()}";
+                    label6.Text = $"Def: {SQLSelections.CraftingItems[i].GetDef().ToString()}";
+                    label7.Text = $"Mdef: {SQLSelections.CraftingItems[i].GetMdef().ToString()}";
+
+
+                }
+            } 
         }
     }
 }

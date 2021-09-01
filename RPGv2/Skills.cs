@@ -109,5 +109,10 @@ namespace RPGv2
             textBox1.Text = comboBox1.SelectedItem.ToString();
             SQLSelections.UpdateSelectedSkill();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

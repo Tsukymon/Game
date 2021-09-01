@@ -76,7 +76,7 @@ namespace RPGv2
                     toolTipsGear[i].SetToolTip(pictureBoxesGear[i], $"{SQLSelections.AvailableGear[i].GetName()} Lvl: {SQLSelections.AvailableGear[i].GetLvlReq()}\r\n\r\nHp: {SQLSelections.AvailableGear[i].GetHp()}   Atk: {SQLSelections.AvailableGear[i].GetAtk()}   Matk: {SQLSelections.AvailableGear[i].GetMatk()}\r\nAcc: {SQLSelections.AvailableGear[i].GetAcc()}   Crit: {SQLSelections.AvailableGear[i].GetCrit()}\r\nDef: {SQLSelections.AvailableGear[i].GetDef()}   Mdef: {SQLSelections.AvailableGear[i].GetMdef()}");
                 }
 
-                pictureBoxesGear[i].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\{SQLSelections.AvailableGear[i].GetGearType()}.png");
+                pictureBoxesGear[i].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\Gear\{SQLSelections.AvailableGear[i].GetGearType()}.png");
             }
 
             for (int i = 0; i < SQLSelections.PlayersItems.Count; i++)
