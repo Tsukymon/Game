@@ -52,20 +52,20 @@ namespace RPGv2
                 case 1:
                     button1.Location = new Point(12, 12 + 55);
                     button2.Location = new Point(12, 12);
-                    button3.Location = new Point(350, 12);
+                    button3.Location = new Point(370, 12);
                     label1.Location = new Point(138, 31);
                     button2.Visible = true;
                     button3.Visible = true;
                     label1.Visible = true;
-                    label1.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[0].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[0].GetExp()} / {SQLSelections.CurrentHiredHeroes[0].GetExpForNextLvl()}";
+                    label1.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[0].GetLvl()}        Exp: {SQLSelections.CurrentHiredHeroes[0].GetExp()} / {SQLSelections.CurrentHiredHeroes[0].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[0].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[0].GetHp()} Hp";
                     button2.Text = SQLSelections.CurrentHiredHeroes[0].GetName();
                     break;
                 case 2:
                     button1.Location = new Point(12, 12 + 55+55);
                     button2.Location = new Point(12, 12);
-                    button3.Location = new Point(350, 12);
+                    button3.Location = new Point(370, 12);
                     button4.Location = new Point(12, 12 + 55);
-                    button8.Location = new Point(350, 12 + 55);
+                    button8.Location = new Point(370, 12 + 55);
                     label1.Location = new Point(138, 31);
                     label2.Location = new Point(138, 31 + 55);
                     label1.Visible = true;
@@ -74,8 +74,8 @@ namespace RPGv2
                     button3.Visible = true;
                     button4.Visible = true;
                     button8.Visible = true;
-                    label1.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[0].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[0].GetExp()} / {SQLSelections.CurrentHiredHeroes[0].GetExpForNextLvl()}";
-                    label2.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[1].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[1].GetExp()} / {SQLSelections.CurrentHiredHeroes[1].GetExpForNextLvl()}";
+                    label1.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[0].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[0].GetExp()} / {SQLSelections.CurrentHiredHeroes[0].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[0].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[0].GetHp()} Hp";
+                    label2.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[1].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[1].GetExp()} / {SQLSelections.CurrentHiredHeroes[1].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[1].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[1].GetHp()} Hp";
                     button2.Text = SQLSelections.CurrentHiredHeroes[0].GetName();
                     button4.Text = SQLSelections.CurrentHiredHeroes[1].GetName();
                     break;
@@ -99,9 +99,9 @@ namespace RPGv2
                     button8.Visible = true;
                     button5.Visible = true;
                     button9.Visible = true;
-                    label1.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[0].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[0].GetExp()} / {SQLSelections.CurrentHiredHeroes[0].GetExpForNextLvl()}";
-                    label2.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[1].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[1].GetExp()} / {SQLSelections.CurrentHiredHeroes[1].GetExpForNextLvl()}";
-                    label3.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[2].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[2].GetExp()} / {SQLSelections.CurrentHiredHeroes[2].GetExpForNextLvl()}";
+                    label1.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[0].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[0].GetExp()} / {SQLSelections.CurrentHiredHeroes[0].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[0].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[0].GetHp()} Hp";
+                    label2.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[1].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[1].GetExp()} / {SQLSelections.CurrentHiredHeroes[1].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[1].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[1].GetHp()} Hp";
+                    label3.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[2].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[2].GetExp()} / {SQLSelections.CurrentHiredHeroes[2].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[2].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[2].GetHp()} Hp";
                     button2.Text = SQLSelections.CurrentHiredHeroes[0].GetName();
                     button4.Text = SQLSelections.CurrentHiredHeroes[1].GetName();
                     button5.Text = SQLSelections.CurrentHiredHeroes[2].GetName();
@@ -133,10 +133,10 @@ namespace RPGv2
                     button9.Visible = true;
                     button6.Visible = true;
                     button10.Visible = true;
-                    label1.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[0].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[0].GetExp()} / {SQLSelections.CurrentHiredHeroes[0].GetExpForNextLvl()}";
-                    label2.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[1].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[1].GetExp()} / {SQLSelections.CurrentHiredHeroes[1].GetExpForNextLvl()}";
-                    label3.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[2].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[2].GetExp()} / {SQLSelections.CurrentHiredHeroes[2].GetExpForNextLvl()}";
-                    label4.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[3].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[3].GetExp()} / {SQLSelections.CurrentHiredHeroes[3].GetExpForNextLvl()}";
+                    label1.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[0].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[0].GetExp()} / {SQLSelections.CurrentHiredHeroes[0].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[0].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[0].GetHp()} Hp";
+                    label2.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[1].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[1].GetExp()} / {SQLSelections.CurrentHiredHeroes[1].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[1].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[1].GetHp()} Hp";
+                    label3.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[2].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[2].GetExp()} / {SQLSelections.CurrentHiredHeroes[2].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[2].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[2].GetHp()} Hp";
+                    label4.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[3].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[3].GetExp()} / {SQLSelections.CurrentHiredHeroes[3].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[3].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[3].GetHp()} Hp";
                     button2.Text = SQLSelections.CurrentHiredHeroes[0].GetName();
                     button4.Text = SQLSelections.CurrentHiredHeroes[1].GetName();
                     button5.Text = SQLSelections.CurrentHiredHeroes[2].GetName();
@@ -175,11 +175,11 @@ namespace RPGv2
                     button9.Visible = true;
                     button6.Visible = true;
                     button10.Visible = true;
-                    label1.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[0].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[0].GetExp()} / {SQLSelections.CurrentHiredHeroes[0].GetExpForNextLvl()}";
-                    label2.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[1].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[1].GetExp()} / {SQLSelections.CurrentHiredHeroes[1].GetExpForNextLvl()}";
-                    label3.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[2].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[2].GetExp()} / {SQLSelections.CurrentHiredHeroes[2].GetExpForNextLvl()}";
-                    label4.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[3].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[3].GetExp()} / {SQLSelections.CurrentHiredHeroes[3].GetExpForNextLvl()}";
-                    label5.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[4].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[4].GetExp()} / {SQLSelections.CurrentHiredHeroes[4].GetExpForNextLvl()}";
+                    label1.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[0].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[0].GetExp()} / {SQLSelections.CurrentHiredHeroes[0].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[0].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[0].GetHp()} Hp";
+                    label2.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[1].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[1].GetExp()} / {SQLSelections.CurrentHiredHeroes[1].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[1].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[1].GetHp()} Hp";
+                    label3.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[2].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[2].GetExp()} / {SQLSelections.CurrentHiredHeroes[2].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[2].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[2].GetHp()} Hp";
+                    label4.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[3].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[3].GetExp()} / {SQLSelections.CurrentHiredHeroes[3].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[3].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[3].GetHp()} Hp";
+                    label5.Text = $"Lvl: {SQLSelections.CurrentHiredHeroes[4].GetLvl()}         Exp: {SQLSelections.CurrentHiredHeroes[4].GetExp()} / {SQLSelections.CurrentHiredHeroes[4].GetExpForNextLvl()}          {SQLSelections.CurrentHiredHeroes[4].GetCurentHp()} / {SQLSelections.CurrentHiredHeroes[4].GetHp()} Hp";
                     button2.Text = SQLSelections.CurrentHiredHeroes[0].GetName();
                     button4.Text = SQLSelections.CurrentHiredHeroes[1].GetName();
                     button5.Text = SQLSelections.CurrentHiredHeroes[2].GetName();
@@ -199,10 +199,9 @@ namespace RPGv2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            SQLSelections.CurrentSelectedHeroIndex = 0;
+            SQLSelections.CurrentSelectedHeroIndex = 0;           
             Adventure adventure = new Adventure();
-            adventure.ShowDialog();
-                 
+            adventure.ShowDialog();                                        
         }
 
         private void button8_Click(object sender, EventArgs e)

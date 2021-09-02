@@ -153,7 +153,7 @@ namespace RPGv2
             {
                 while (rdr.Read())
                 {
-                    CurrentHiredHeroes.Add(new HiredHero(rdr.GetInt32(0), rdr.GetString(1), rdr.GetFloat(2), rdr.GetFloat(3), rdr.GetFloat(4), rdr.GetFloat(5), rdr.GetFloat(6), rdr.GetFloat(7), rdr.GetFloat(8), rdr.GetInt32(9), rdr.GetInt32(10), rdr.GetInt32(11), rdr.GetInt32(12), rdr.GetInt32(13)));
+                    CurrentHiredHeroes.Add(new HiredHero(rdr.GetInt32(0), rdr.GetString(1), rdr.GetFloat(2), rdr.GetFloat(3), rdr.GetFloat(4), rdr.GetFloat(5), rdr.GetFloat(6), rdr.GetFloat(7), rdr.GetFloat(8), rdr.GetInt32(9), rdr.GetInt32(10), rdr.GetInt32(11), rdr.GetInt32(12), rdr.GetInt32(13), rdr.GetInt32(14)));
                 }               
             }
             else
@@ -168,13 +168,13 @@ namespace RPGv2
         {
             var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
             var con = new NpgsqlConnection(cs);
-            var HireHero = $"INSERT INTO public.\"HiredHeroes\" VALUES({GetHiredHeroesMaxIndex()+1}, '{LoadedDefaultHeroes[index].GetName()}', {LoadedDefaultHeroes[index].GetHp()}, {LoadedDefaultHeroes[index].GetAtk()}, {LoadedDefaultHeroes[index].GetMatk()}, {LoadedDefaultHeroes[index].GetAcc()}, {LoadedDefaultHeroes[index].GetCrit()}, {LoadedDefaultHeroes[index].GetDef()}, {LoadedDefaultHeroes[index].GetMdef()}, 1, {CurrentPlayerID}, 0, 10, -1)";
+            var HireHero = $"INSERT INTO public.\"HiredHeroes\" VALUES({GetHiredHeroesMaxIndex()+1}, '{LoadedDefaultHeroes[index].GetName()}', {LoadedDefaultHeroes[index].GetHp()}, {LoadedDefaultHeroes[index].GetAtk()}, {LoadedDefaultHeroes[index].GetMatk()}, {LoadedDefaultHeroes[index].GetAcc()}, {LoadedDefaultHeroes[index].GetCrit()}, {LoadedDefaultHeroes[index].GetDef()}, {LoadedDefaultHeroes[index].GetMdef()}, 1, {CurrentPlayerID}, 0, 10, -1, {LoadedDefaultHeroes[index].GetHp()})";
             var cmd = new NpgsqlCommand(HireHero, con);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
 
-            CurrentHiredHeroes.Add(new HiredHero(GetHiredHeroesMaxIndex(), LoadedDefaultHeroes[index].GetName(), LoadedDefaultHeroes[index].GetHp(), LoadedDefaultHeroes[index].GetAtk(), LoadedDefaultHeroes[index].GetMatk(), LoadedDefaultHeroes[index].GetAcc(), LoadedDefaultHeroes[index].GetCrit(), LoadedDefaultHeroes[index].GetDef(), LoadedDefaultHeroes[index].GetMdef(), 1, CurrentPlayerID, 0, 10, -1));
+            CurrentHiredHeroes.Add(new HiredHero(GetHiredHeroesMaxIndex(), LoadedDefaultHeroes[index].GetName(), LoadedDefaultHeroes[index].GetHp(), LoadedDefaultHeroes[index].GetAtk(), LoadedDefaultHeroes[index].GetMatk(), LoadedDefaultHeroes[index].GetAcc(), LoadedDefaultHeroes[index].GetCrit(), LoadedDefaultHeroes[index].GetDef(), LoadedDefaultHeroes[index].GetMdef(), 1, CurrentPlayerID, 0, 10, -1, LoadedDefaultHeroes[index].GetHp()));
             
         }
 
@@ -238,14 +238,19 @@ namespace RPGv2
             con.Close();
         }
 
-        public static void UpdateExpForNextLvl()
+        public static void UpdateExpForNextLvl(int index) //also manages CurentHp
         {
             var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
             var con = new NpgsqlConnection(cs);
             var UpdateExpForNextLvl = $"UPDATE public.\"HiredHeroes\" SET \"ExpForNextLvl\" = {CurrentHiredHeroes[CurrentSelectedHeroIndex].GetExpForNextLvl()} WHERE \"ID\" = {CurrentHiredHeroes[CurrentSelectedHeroIndex].GetID()}";
+            var CurentHp = $"UPDATE public.\"HiredHeroes\" SET \"CurentHp\" = {index} WHERE \"ID\" = {CurrentHiredHeroes[CurrentSelectedHeroIndex].GetID()}";
             var cmd = new NpgsqlCommand(UpdateExpForNextLvl, con);
+            var cmd2 = new NpgsqlCommand(CurentHp, con);
             con.Open();
             cmd.ExecuteNonQuery();
+            con.Close();
+            con.Open();
+            cmd2.ExecuteNonQuery();
             con.Close();
         }
 
@@ -580,6 +585,7 @@ namespace RPGv2
             }
             else
             {
+                
                 id = id - 10000;
                 var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
                 var con = new NpgsqlConnection(cs);
@@ -589,7 +595,19 @@ namespace RPGv2
                 cmd.ExecuteNonQuery();
                 con.Close();
                 
+                
             }
+        }
+
+        public static void RemoveGear(int index)
+        {
+            var cs = "Host=localhost;Username=postgres;Password=12345;Database=postgres";
+            var con = new NpgsqlConnection(cs);
+            var RemoveGear = $"DELETE FROM public.\"AvailableGear\" WHERE \"ID\" = {index}";
+            var cmd = new NpgsqlCommand(RemoveGear, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
     }
 

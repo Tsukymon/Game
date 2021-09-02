@@ -37,9 +37,16 @@ namespace RPGv2
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            CombatReport combatReport = new CombatReport();
-            combatReport.ShowDialog();
+            if(SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].GetCurentHp() != 0)
+            {
+                CombatReport combatReport = new CombatReport();
+                combatReport.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Sadly your hero is dead", "Hero is dead");
+            }
+            
         }
 
 

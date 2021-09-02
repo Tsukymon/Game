@@ -11,6 +11,7 @@ namespace RPGv2
         int ID;
         string Name;
         float Hp;
+        float CurentHp;
         float Atk;
         float Matk;
         float Acc;
@@ -32,7 +33,7 @@ namespace RPGv2
         int SelectedSkill;
 
 
-        public HiredHero(int id, string name, float hp, float atk, float matk, float acc, float crit, float def, float mdef, int lvl, int playerID, int exp, int expfornextlvl, int selectedskill)
+        public HiredHero(int id, string name, float hp, float atk, float matk, float acc, float crit, float def, float mdef, int lvl, int playerID, int exp, int expfornextlvl, int selectedskill, float curentHp)
         {
             ID = id;
             Name = name;
@@ -47,7 +48,8 @@ namespace RPGv2
             PlayerID = playerID;
             Exp = exp;
             ExpForNextLvl = expfornextlvl;
-            SelectedSkill = selectedskill;           
+            SelectedSkill = selectedskill;
+            CurentHp = curentHp;
         }
 
         public string GetName()
@@ -108,6 +110,16 @@ namespace RPGv2
         public int GetExp()
         {
             return Exp;
+        }
+
+        public float GetCurentHp()
+        {
+            return CurentHp;
+        }
+
+        public void SetCurentHp(int index)
+        {
+            CurentHp = index;
         }
 
         public void SetExp(int index)
@@ -228,6 +240,15 @@ namespace RPGv2
         public void SetSelectedSkill(int index)
         {
             SelectedSkill = index;
+        }
+
+        public void Heal(int index)
+        {
+            CurentHp = CurentHp + index;
+            if (CurentHp > Hp)
+            {
+                CurentHp = Hp;
+            }
         }
 
         public void ResetMultipliers()

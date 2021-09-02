@@ -17,7 +17,7 @@ namespace RPGv2
         int PhaseCounter = 1;
         int TurnCounter = 1;
         int CritMultiplier = 2;
-        float HeroHp = SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].GetHp();
+        float HeroHp = SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].GetCurentHp();
         float CreatureHp = SQLSelections.LoadedCreatures[SQLSelections.SelectedCreatureIndex].GetHp();
 
         List<PictureBox> pictureBoxes = new List<PictureBox>();
@@ -80,6 +80,7 @@ namespace RPGv2
             if (CreatureHp <= 0)
             {
                 // CREATURE DIED HERE
+                SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].SetCurentHp((Int32)HeroHp);
                 CreatureHp = 0;              
                 int x = 0;
                 int counter = 0;
@@ -90,7 +91,7 @@ namespace RPGv2
                 SQLSelections.GiveHeroExp(SQLSelections.CurrentSelectedHeroIndex);
                 SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].CalculateLvl(SQLSelections.ExpCurve[SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].GetLvl()].GetExp());
                 SQLSelections.UpdateLvl();
-                SQLSelections.UpdateExpForNextLvl();
+                SQLSelections.UpdateExpForNextLvl((Int32)HeroHp);
 
                 DropCalculation dropCalculation = new DropCalculation(SQLSelections.SelectedCreatureIndex);
                 dropCalculation.CalculateSlot1();
@@ -185,6 +186,8 @@ namespace RPGv2
                 if (HeroHp <= 0)
                 {
                     HeroHp = 0;
+                    SQLSelections.UpdateExpForNextLvl((Int32)HeroHp);
+                    SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].SetCurentHp(0);
                     textBox1.AppendText($"\r\n{SQLSelections.CurrentHiredHeroes[SQLSelections.CurrentSelectedHeroIndex].GetName()} has died");
                     button1.Enabled = false;
                     button2.Visible = true;

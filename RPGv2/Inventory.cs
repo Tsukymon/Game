@@ -76,6 +76,11 @@ namespace RPGv2
                     toolTipsGear[i].SetToolTip(pictureBoxesGear[i], $"{SQLSelections.AvailableGear[i].GetName()} Lvl: {SQLSelections.AvailableGear[i].GetLvlReq()}\r\n\r\nHp: {SQLSelections.AvailableGear[i].GetHp()}   Atk: {SQLSelections.AvailableGear[i].GetAtk()}   Matk: {SQLSelections.AvailableGear[i].GetMatk()}\r\nAcc: {SQLSelections.AvailableGear[i].GetAcc()}   Crit: {SQLSelections.AvailableGear[i].GetCrit()}\r\nDef: {SQLSelections.AvailableGear[i].GetDef()}   Mdef: {SQLSelections.AvailableGear[i].GetMdef()}");
                 }
 
+                if(SQLSelections.AvailableGear[i].GetGearType() == 7)
+                {
+                    toolTipsGear[i].SetToolTip(pictureBoxesGear[i], $"{SQLSelections.AvailableGear[i].GetName()}\r\n\r\nHeals for {SQLSelections.AvailableGear[i].GetHp()} Hp");
+                }
+
                 pictureBoxesGear[i].Image = Image.FromFile($@"C:\Programy\RPGv2\Pics\Gear\{SQLSelections.AvailableGear[i].GetGearType()}.png");
             }
 

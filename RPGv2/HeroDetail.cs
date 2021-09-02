@@ -267,5 +267,11 @@ namespace RPGv2
         {
             LabelsInit();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Potions potion = new Potions();
+            potion.ShowDialog();
+        }
     }
 }

@@ -170,6 +170,12 @@
       <DependentUpon>NewPlayer.cs</DependentUpon>
     </Compile>
     <Compile Include="Player.cs" />
+    <Compile Include="Potions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Potions.Designer.cs">
+      <DependentUpon>Potions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Skills.cs">
@@ -217,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewPlayer.resx">
       <DependentUpon>NewPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Potions.resx">
+      <DependentUpon>Potions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
